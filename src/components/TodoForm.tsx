@@ -1,6 +1,6 @@
-import { PRIORITY_CONFIG, COLOR_OPTIONS } from "../constants";
-import type { Priority } from "../types/todo";
 import { useState } from "react";
+import type { Priority } from "../types/todo";
+import { PRIORITY_CONFIG, COLOR_OPTIONS } from "../constants";
 
 interface FormData {
   title: string;
@@ -218,7 +218,7 @@ export function TodoForm({
                       ? "ring-2 ring-offset-2 ring-offset-transparent scale-110"
                       : ""
                   }`}
-                  style={{ backgroundColor: c, ringColor: c }}
+                  style={{ backgroundColor: c }}
                 />
               ))}
             </div>
