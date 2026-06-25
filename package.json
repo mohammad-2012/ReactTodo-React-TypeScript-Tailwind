@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://mohammad-2012.github.io/ReactTodo_-React-TypeScript-Tailwind-/",
+  "homepage": "https://mohammad-2012.github.io/ReactTodo-React-TypeScript-Tailwind/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
