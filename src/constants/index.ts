@@ -1,4 +1,4 @@
-import { Priority } from "../types/todo";
+import type { Priority } from "../types/todo";
 
 export const PRIORITY_CONFIG: Record<
   Priority,
