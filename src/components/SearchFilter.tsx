@@ -24,7 +24,7 @@ export function SearchFilter({
     <div className="glass rounded-2xl p-3 mb-5 flex flex-col sm:flex-row gap-2">
       <input
         type="text"
-        placeholder="🔍 جستجو در کارها..."
+        placeholder="🔍 Search tasks..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         className="flex-1 min-w-[200px] text-sm bg-transparent outline-none placeholder-gray-400 dark:placeholder-gray-500 px-2 py-1.5"
@@ -42,7 +42,7 @@ export function SearchFilter({
                   : "bg-gray-100/50 text-gray-500 hover:bg-gray-200/50"
             }`}
           >
-            {f === "all" ? "همه" : f === "active" ? "فعال" : "انجام شده"}
+            {f === "all" ? "All" : f === "active" ? "Active" : "Completed"}
           </button>
         ))}
         <select
@@ -56,7 +56,7 @@ export function SearchFilter({
               : "bg-gray-100/50 text-gray-500 hover:bg-gray-200/50"
           }`}
         >
-          <option value="all">همه اولویت‌ها</option>
+          <option value="all">All Priorities</option>
           {(Object.keys(PRIORITY_CONFIG) as Priority[]).map((p) => (
             <option key={p} value={p}>
               {PRIORITY_CONFIG[p].label}
