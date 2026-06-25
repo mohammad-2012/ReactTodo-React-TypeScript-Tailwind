@@ -1,4 +1,4 @@
-import { Todo, Priority } from "../types/todo";
+import type { Todo, Priority } from "../types/todo";
 import { PRIORITY_CONFIG } from "../constants";
 
 interface TodoItemProps {
@@ -21,7 +21,7 @@ function formatTime(seconds: number) {
 function formatDate(dateStr: string) {
   if (!dateStr) return "";
   const d = new Date(dateStr);
-  return d.toLocaleDateString("fa-IR");
+  return d.toLocaleDateString("en-US");
 }
 
 export function TodoItem({
@@ -105,7 +105,7 @@ export function TodoItem({
               </span>
               {overdue && (
                 <span className="text-xs px-2.5 py-0.5 rounded-xl font-semibold text-red-500 bg-red-100 dark:bg-red-900/30 animate-pulse">
-                  ⚠️ دیر شده!
+                  ⚠️ Overdue!
                 </span>
               )}
             </div>
@@ -164,7 +164,7 @@ export function TodoItem({
                     timerDone ? "text-green-400" : "text-indigo-400"
                   }`}
                 >
-                  {timerDone ? "✅ تموم شد" : formatTime(todo.timerElapsed)} /{" "}
+                  {timerDone ? "✅ Done" : formatTime(todo.timerElapsed)} /{" "}
                   {formatTime(todo.timerSeconds)}
                 </span>
                 <button
@@ -199,13 +199,13 @@ export function TodoItem({
               : "bg-gray-100/50 hover:bg-gray-200/50 text-gray-600"
           }`}
         >
-          ✏️ ویرایش
+          ✏️ Edit
         </button>
         <button
           onClick={() => onDelete(todo.id)}
           className="text-xs px-3 py-1.5 rounded-xl font-semibold bg-red-100/50 text-red-500 hover:bg-red-200/50 dark:bg-red-900/30 dark:hover:bg-red-900/50 transition-all hover:scale-105"
         >
-          🗑 حذف
+          🗑 Delete
         </button>
       </div>
     </div>
