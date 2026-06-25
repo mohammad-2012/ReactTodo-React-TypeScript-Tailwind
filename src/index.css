@@ -1,11 +1,10 @@
 @import "tailwindcss";
 
-
 @layer base {
   * {
     @apply transition-colors duration-200;
   }
-  
+
   body {
     @apply antialiased;
   }
@@ -27,7 +26,7 @@
   .glass {
     @apply backdrop-blur-xl bg-white/70 dark:bg-gray-900/70 border border-white/20 dark:border-gray-700/30;
   }
-  
+
   .glass-dark {
     @apply backdrop-blur-xl bg-gray-900/80 border border-gray-700/30;
   }

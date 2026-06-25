@@ -21,25 +21,29 @@ export function SearchFilter({
   dark,
 }: SearchFilterProps) {
   return (
-    <div className="glass rounded-2xl p-3 mb-5 flex flex-col sm:flex-row gap-2">
+    <div
+      className={`rounded-2xl p-3 mb-5 flex flex-col sm:flex-row gap-2 ${
+        dark ? "bg-gray-900" : "bg-white shadow-sm border border-gray-100"
+      }`}
+    >
       <input
         type="text"
         placeholder="🔍 Search tasks..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="flex-1 min-w-[200px] text-sm bg-transparent outline-none placeholder-gray-400 dark:placeholder-gray-500 px-2 py-1.5"
+        className="flex-1 min-w-[200px] text-sm bg-transparent outline-none placeholder-gray-400 dark:placeholder-gray-500 px-2 py-1.5 text-gray-900 dark:text-gray-100"
       />
       <div className="flex gap-1.5 flex-wrap">
         {(["all", "active", "completed"] as FilterType[]).map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
               filter === f
-                ? "bg-gradient-to-r from-indigo-400 to-purple-400 text-white shadow-lg shadow-indigo-400/30"
+                ? "bg-indigo-500 text-white"
                 : dark
-                  ? "bg-gray-800/50 text-gray-400 hover:bg-gray-700/50"
-                  : "bg-gray-100/50 text-gray-500 hover:bg-gray-200/50"
+                  ? "bg-gray-800 text-gray-400 hover:bg-gray-700"
+                  : "bg-gray-100 text-gray-500 hover:bg-gray-200"
             }`}
           >
             {f === "all" ? "All" : f === "active" ? "Active" : "Completed"}
@@ -52,8 +56,8 @@ export function SearchFilter({
           }
           className={`px-3 py-1.5 rounded-xl text-xs font-semibold outline-none cursor-pointer transition-all ${
             dark
-              ? "bg-gray-800/50 text-gray-300 hover:bg-gray-700/50"
-              : "bg-gray-100/50 text-gray-500 hover:bg-gray-200/50"
+              ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
+              : "bg-gray-100 text-gray-500 hover:bg-gray-200"
           }`}
         >
           <option value="all">All Priorities</option>

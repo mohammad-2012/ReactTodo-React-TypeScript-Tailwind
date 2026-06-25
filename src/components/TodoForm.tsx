@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { Priority } from "../types/todo";
 import { PRIORITY_CONFIG, COLOR_OPTIONS } from "../constants";
 
@@ -29,15 +29,51 @@ export function TodoForm({
   dark,
 }: TodoFormProps) {
   const [form, setForm] = useState({
-    title: editData?.title || "",
-    description: editData?.description || "",
-    priority: editData?.priority || ("medium" as Priority),
-    color: editData?.color || "#818cf8",
-    dueDate: editData?.dueDate || "",
-    dueTime: editData?.dueTime || "",
-    timerSeconds: editData?.timerSeconds || 0,
-    tags: editData?.tags?.join(", ") || "",
+    title: "",
+    description: "",
+    priority: "medium" as Priority,
+    color: "#818cf8",
+    dueDate: "",
+    dueTime: "",
+    timerSeconds: 0,
+    tags: "",
   });
+
+  const resetForm = () => {
+    setForm({
+      title: "",
+      description: "",
+      priority: "medium",
+      color: "#818cf8",
+      dueDate: "",
+      dueTime: "",
+      timerSeconds: 0,
+      tags: "",
+    });
+  };
+
+  useEffect(() => {
+    if (editData) {
+      setForm({
+        title: editData.title || "",
+        description: editData.description || "",
+        priority: editData.priority || "medium",
+        color: editData.color || "#818cf8",
+        dueDate: editData.dueDate || "",
+        dueTime: editData.dueTime || "",
+        timerSeconds: editData.timerSeconds || 0,
+        tags: editData.tags?.join(", ") || "",
+      });
+    } else {
+      resetForm();
+    }
+  }, [editData]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      resetForm();
+    }
+  }, [isOpen]);
 
   const handleSubmit = () => {
     if (!form.title.trim()) return;
@@ -56,6 +92,12 @@ export function TodoForm({
       timerSeconds: parseInt(String(form.timerSeconds)) || 0,
       tags,
     });
+    resetForm();
+    onClose();
+  };
+
+  const handleClose = () => {
+    resetForm();
     onClose();
   };
 
@@ -64,23 +106,25 @@ export function TodoForm({
   return (
     <>
       <div
-        className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
-        onClick={onClose}
+        className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
+        onClick={handleClose}
       />
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
         <div
-          className={`w-full max-w-lg rounded-3xl p-6 max-h-[90vh] overflow-y-auto transition-all duration-300 ${
-            dark ? "glass-dark" : "glass"
+          className={`w-full max-w-lg rounded-3xl p-6 max-h-[90vh] overflow-y-auto ${
+            dark
+              ? "bg-gray-900 border border-gray-700/30"
+              : "bg-white border border-gray-200 shadow-md"
           }`}
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex justify-between items-center mb-5">
-            <h2 className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+            <h2 className="text-2xl font-bold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
               {editData ? "✏️ Edit Task" : "➕ New Task"}
             </h2>
             <button
-              onClick={onClose}
-              className="w-10 h-10 rounded-xl flex items-center justify-center text-xl hover:bg-white/10 transition-all"
+              onClick={handleClose}
+              className="w-10 h-10 rounded-xl flex items-center justify-center text-xl hover:bg-gray-200/50 dark:hover:bg-gray-700/50 transition-all"
             >
               ✕
             </button>
@@ -93,8 +137,8 @@ export function TodoForm({
             onChange={(e) => setForm({ ...form, title: e.target.value })}
             className={`w-full rounded-2xl px-4 py-3 text-sm outline-none mb-3 font-semibold ${
               dark
-                ? "bg-gray-800/50 placeholder-gray-500 focus:bg-gray-800/70"
-                : "bg-gray-100/50 placeholder-gray-400 focus:bg-gray-100/70"
+                ? "bg-gray-800 placeholder-gray-500 focus:bg-gray-700 text-gray-100"
+                : "bg-gray-50 placeholder-gray-400 focus:bg-gray-100 border border-gray-200 text-gray-900"
             }`}
           />
 
@@ -105,8 +149,8 @@ export function TodoForm({
             rows={3}
             className={`w-full rounded-2xl px-4 py-3 text-sm outline-none mb-3 resize-none ${
               dark
-                ? "bg-gray-800/50 placeholder-gray-500 focus:bg-gray-800/70"
-                : "bg-gray-100/50 placeholder-gray-400 focus:bg-gray-100/70"
+                ? "bg-gray-800 placeholder-gray-500 focus:bg-gray-700 text-gray-100"
+                : "bg-gray-50 placeholder-gray-400 focus:bg-gray-100 border border-gray-200 text-gray-900"
             }`}
           />
 
@@ -122,8 +166,8 @@ export function TodoForm({
                 }
                 className={`w-full rounded-2xl px-3 py-2.5 text-sm outline-none cursor-pointer ${
                   dark
-                    ? "bg-gray-800/50 text-gray-200"
-                    : "bg-gray-100/50 text-gray-700"
+                    ? "bg-gray-800 text-gray-200"
+                    : "bg-gray-50 border border-gray-200 text-gray-900"
                 }`}
               >
                 {(Object.keys(PRIORITY_CONFIG) as Priority[]).map((p) => (
@@ -143,8 +187,8 @@ export function TodoForm({
                 onChange={(e) => setForm({ ...form, dueDate: e.target.value })}
                 className={`w-full rounded-2xl px-3 py-2.5 text-sm outline-none ${
                   dark
-                    ? "bg-gray-800/50 text-gray-200"
-                    : "bg-gray-100/50 text-gray-700"
+                    ? "bg-gray-800 text-gray-200"
+                    : "bg-gray-50 border border-gray-200 text-gray-900"
                 }`}
               />
             </div>
@@ -158,8 +202,8 @@ export function TodoForm({
                 onChange={(e) => setForm({ ...form, dueTime: e.target.value })}
                 className={`w-full rounded-2xl px-3 py-2.5 text-sm outline-none ${
                   dark
-                    ? "bg-gray-800/50 text-gray-200"
-                    : "bg-gray-100/50 text-gray-700"
+                    ? "bg-gray-800 text-gray-200"
+                    : "bg-gray-50 border border-gray-200 text-gray-900"
                 }`}
               />
             </div>
@@ -180,8 +224,8 @@ export function TodoForm({
                 }
                 className={`w-full rounded-2xl px-3 py-2.5 text-sm outline-none ${
                   dark
-                    ? "bg-gray-800/50 text-gray-200"
-                    : "bg-gray-100/50 text-gray-700"
+                    ? "bg-gray-800 text-gray-200"
+                    : "bg-gray-50 border border-gray-200 text-gray-900"
                 }`}
               />
             </div>
@@ -198,8 +242,8 @@ export function TodoForm({
               onChange={(e) => setForm({ ...form, tags: e.target.value })}
               className={`w-full rounded-2xl px-3 py-2.5 text-sm outline-none ${
                 dark
-                  ? "bg-gray-800/50 placeholder-gray-500"
-                  : "bg-gray-100/50 placeholder-gray-400"
+                  ? "bg-gray-800 placeholder-gray-500 text-gray-100"
+                  : "bg-gray-50 placeholder-gray-400 border border-gray-200 text-gray-900"
               }`}
             />
           </div>
@@ -213,9 +257,9 @@ export function TodoForm({
                 <button
                   key={c}
                   onClick={() => setForm({ ...form, color: c })}
-                  className={`w-8 h-8 rounded-full transition-all duration-300 hover:scale-110 ${
+                  className={`w-8 h-8 rounded-full transition-all hover:scale-110 ${
                     form.color === c
-                      ? "ring-2 ring-offset-2 ring-offset-transparent scale-110"
+                      ? "ring-2 ring-offset-2 ring-offset-transparent ring-indigo-500 scale-110"
                       : ""
                   }`}
                   style={{ backgroundColor: c }}
@@ -228,16 +272,16 @@ export function TodoForm({
             <button
               onClick={handleSubmit}
               disabled={!form.title.trim()}
-              className="flex-1 py-3 rounded-2xl text-sm font-bold text-white bg-gradient-to-r from-indigo-400 to-purple-400 hover:opacity-90 disabled:opacity-40 transition-all shadow-lg shadow-indigo-400/30 active:scale-95"
+              className="flex-1 py-3 rounded-2xl text-sm font-bold text-white bg-gradient-to-r from-indigo-500 to-purple-500 hover:opacity-90 disabled:opacity-40 transition-all shadow-lg shadow-indigo-500/30 active:scale-95"
             >
               {editData ? "💾 Save Changes" : "✨ Add Task"}
             </button>
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className={`px-6 py-3 rounded-2xl text-sm font-semibold transition-all ${
                 dark
-                  ? "bg-gray-800/50 hover:bg-gray-700/50"
-                  : "bg-gray-100/50 hover:bg-gray-200/50"
+                  ? "bg-gray-800 hover:bg-gray-700 text-gray-200"
+                  : "bg-gray-100 hover:bg-gray-200 text-gray-700"
               }`}
             >
               Cancel

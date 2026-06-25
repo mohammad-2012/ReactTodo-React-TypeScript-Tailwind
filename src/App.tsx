@@ -71,6 +71,7 @@ export default function App() {
       };
       addTodo(newTodo);
     }
+    setShowForm(false);
   };
 
   const handleEdit = (todo: Todo) => {
@@ -95,7 +96,7 @@ export default function App() {
       }`}
       dir="ltr"
     >
-      <div className="max-w-2xl mx-auto px-4 py-8">
+      <div className="max-w-2xl mx-auto px-4 py-8 flex flex-col min-h-screen">
         <Header
           dark={dark}
           toggleTheme={toggleTheme}
@@ -103,7 +104,9 @@ export default function App() {
           totalCount={todos.length}
         />
 
-        {todos.length > 0 && <ProgressBar progress={progressPercent} />}
+        {todos.length > 0 && (
+          <ProgressBar progress={progressPercent} dark={dark} />
+        )}
 
         <SearchFilter
           search={search}
@@ -118,7 +121,7 @@ export default function App() {
         {!showForm && (
           <button
             onClick={() => setShowForm(true)}
-            className="w-full py-4 rounded-2xl mb-5 text-sm font-bold text-white bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 hover:opacity-90 transition-all shadow-lg shadow-indigo-400/30 active:scale-95"
+            className="w-full py-4 rounded-2xl mb-5 text-sm font-bold text-white bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:opacity-90 transition-all shadow-lg shadow-indigo-500/30 active:scale-95"
           >
             ✦ Add New Task
           </button>

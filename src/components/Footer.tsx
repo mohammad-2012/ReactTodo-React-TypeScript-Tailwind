@@ -5,11 +5,11 @@ interface FooterProps {
 
 export function Footer({ completedCount, onClearCompleted }: FooterProps) {
   return (
-    <div className="mt-8 space-y-3">
+    <div className="mt-auto pt-8 space-y-3">
       {completedCount > 0 && (
         <button
           onClick={onClearCompleted}
-          className="w-full py-3 rounded-2xl text-xs font-semibold text-red-400 hover:text-red-500 bg-red-50/30 hover:bg-red-100/30 dark:bg-red-900/10 dark:hover:bg-red-900/20 transition-all duration-300"
+          className="w-full py-3 rounded-2xl text-xs font-semibold text-red-400 hover:text-red-500 dark:text-red-400 dark:hover:text-red-300 transition-all"
         >
           🗑 Clear Completed ({completedCount})
         </button>
@@ -17,8 +17,15 @@ export function Footer({ completedCount, onClearCompleted }: FooterProps) {
 
       <div className="text-center">
         <p className="text-xs text-gray-400 dark:text-gray-500">
-          Made with <span className="text-red-400 animate-pulse">❤️</span> by
-          TodoList
+          Made with <span className="text-red-400 animate-pulse">❤️</span> by{" "}
+          <a
+            href="https://github.com/mohammad-2012"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-indigo-400 hover:text-indigo-300 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors hover:underline font-medium"
+          >
+            Mohammad
+          </a>
         </p>
       </div>
     </div>

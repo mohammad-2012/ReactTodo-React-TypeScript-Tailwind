@@ -43,15 +43,25 @@ export function TodoList({
     return (
       <div
         className={`text-center py-20 rounded-3xl ${
-          dark ? "glass-dark" : "glass"
+          dark
+            ? "bg-gray-900 border border-gray-700/30"
+            : "bg-white border border-gray-200 shadow-sm"
         }`}
       >
         <div className="text-6xl mb-4 animate-bounce">🎯</div>
-        <p className="text-gray-400 dark:text-gray-500 text-sm font-medium">
+        <p
+          className={`text-sm font-medium ${
+            dark ? "text-gray-400" : "text-gray-600"
+          }`}
+        >
           {todos.length === 0 ? "No tasks yet!" : "No tasks found!"}
         </p>
         {todos.length === 0 && (
-          <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+          <p
+            className={`text-xs mt-1 ${
+              dark ? "text-gray-500" : "text-gray-400"
+            }`}
+          >
             Click ✦ Add New Task to get started!
           </p>
         )}
