@@ -93,7 +93,7 @@ export default function App() {
       className={`min-h-screen transition-colors duration-300 ${
         dark ? "dark bg-gray-950 text-gray-100" : "bg-gray-50 text-gray-900"
       }`}
-      dir="rtl"
+      dir="ltr"
     >
       <div className="max-w-2xl mx-auto px-4 py-8">
         <Header
@@ -120,7 +120,7 @@ export default function App() {
             onClick={() => setShowForm(true)}
             className="w-full py-4 rounded-2xl mb-5 text-sm font-bold text-white bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 hover:opacity-90 transition-all shadow-lg shadow-indigo-400/30 active:scale-95"
           >
-            ✦ کار جدید اضافه کن
+            ✦ Add New Task
           </button>
         )}
 
