@@ -1,6 +1,6 @@
-import { useState } from "react";
-import type { Priority } from "../types/todo";
 import { PRIORITY_CONFIG, COLOR_OPTIONS } from "../constants";
+import type { Priority } from "../types/todo";
+import { useState } from "react";
 
 interface FormData {
   title: string;
@@ -76,7 +76,7 @@ export function TodoForm({
         >
           <div className="flex justify-between items-center mb-5">
             <h2 className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-              {editData ? "✏️ ویرایش کار" : "➕ کار جدید"}
+              {editData ? "✏️ Edit Task" : "➕ New Task"}
             </h2>
             <button
               onClick={onClose}
@@ -88,7 +88,7 @@ export function TodoForm({
 
           <input
             type="text"
-            placeholder="عنوان کار..."
+            placeholder="Task title..."
             value={form.title}
             onChange={(e) => setForm({ ...form, title: e.target.value })}
             className={`w-full rounded-2xl px-4 py-3 text-sm outline-none mb-3 font-semibold ${
@@ -99,7 +99,7 @@ export function TodoForm({
           />
 
           <textarea
-            placeholder="توضیحات (اختیاری)..."
+            placeholder="Description (optional)..."
             value={form.description}
             onChange={(e) => setForm({ ...form, description: e.target.value })}
             rows={3}
@@ -113,7 +113,7 @@ export function TodoForm({
           <div className="grid grid-cols-2 gap-3 mb-3">
             <div>
               <label className="text-xs text-gray-400 dark:text-gray-500 mb-1.5 block">
-                اولویت
+                Priority
               </label>
               <select
                 value={form.priority}
@@ -135,7 +135,7 @@ export function TodoForm({
             </div>
             <div>
               <label className="text-xs text-gray-400 dark:text-gray-500 mb-1.5 block">
-                تاریخ سررسید
+                Due Date
               </label>
               <input
                 type="date"
@@ -150,7 +150,7 @@ export function TodoForm({
             </div>
             <div>
               <label className="text-xs text-gray-400 dark:text-gray-500 mb-1.5 block">
-                ساعت
+                Time
               </label>
               <input
                 type="time"
@@ -165,12 +165,12 @@ export function TodoForm({
             </div>
             <div>
               <label className="text-xs text-gray-400 dark:text-gray-500 mb-1.5 block">
-                تایمر (ثانیه)
+                Timer (seconds)
               </label>
               <input
                 type="number"
                 min={0}
-                placeholder="مثلاً ۱۵۰۰"
+                placeholder="e.g. 1500"
                 value={form.timerSeconds || ""}
                 onChange={(e) =>
                   setForm({
@@ -189,11 +189,11 @@ export function TodoForm({
 
           <div className="mb-3">
             <label className="text-xs text-gray-400 dark:text-gray-500 mb-1.5 block">
-              برچسب‌ها (با کاما جدا کن)
+              Tags (separate with commas)
             </label>
             <input
               type="text"
-              placeholder="مثلاً: کار, مهم, پروژه"
+              placeholder="e.g. work, important, project"
               value={form.tags}
               onChange={(e) => setForm({ ...form, tags: e.target.value })}
               className={`w-full rounded-2xl px-3 py-2.5 text-sm outline-none ${
@@ -206,7 +206,7 @@ export function TodoForm({
 
           <div className="mb-5">
             <label className="text-xs text-gray-400 dark:text-gray-500 mb-2 block">
-              رنگ
+              Color
             </label>
             <div className="flex gap-3 flex-wrap">
               {COLOR_OPTIONS.map((c) => (
@@ -230,7 +230,7 @@ export function TodoForm({
               disabled={!form.title.trim()}
               className="flex-1 py-3 rounded-2xl text-sm font-bold text-white bg-gradient-to-r from-indigo-400 to-purple-400 hover:opacity-90 disabled:opacity-40 transition-all shadow-lg shadow-indigo-400/30 active:scale-95"
             >
-              {editData ? "💾 ذخیره تغییرات" : "✨ افزودن کار"}
+              {editData ? "💾 Save Changes" : "✨ Add Task"}
             </button>
             <button
               onClick={onClose}
@@ -240,7 +240,7 @@ export function TodoForm({
                   : "bg-gray-100/50 hover:bg-gray-200/50"
               }`}
             >
-              لغو
+              Cancel
             </button>
           </div>
         </div>
