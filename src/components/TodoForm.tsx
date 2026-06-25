@@ -1,12 +1,23 @@
 import { useState } from "react";
-import { Priority } from "../types/todo";
+import type { Priority } from "../types/todo";
 import { PRIORITY_CONFIG, COLOR_OPTIONS } from "../constants";
+
+interface FormData {
+  title: string;
+  description: string;
+  priority: Priority;
+  color: string;
+  dueDate: string;
+  dueTime: string;
+  timerSeconds: number;
+  tags: string[];
+}
 
 interface TodoFormProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: any) => void;
-  editData?: any;
+  onSubmit: (data: FormData) => void;
+  editData?: (FormData & { id?: string }) | null;
   dark: boolean;
 }
 
@@ -36,9 +47,14 @@ export function TodoForm({
       .filter(Boolean);
 
     onSubmit({
-      ...form,
-      tags,
+      title: form.title,
+      description: form.description,
+      priority: form.priority,
+      color: form.color,
+      dueDate: form.dueDate,
+      dueTime: form.dueTime,
       timerSeconds: parseInt(String(form.timerSeconds)) || 0,
+      tags,
     });
     onClose();
   };

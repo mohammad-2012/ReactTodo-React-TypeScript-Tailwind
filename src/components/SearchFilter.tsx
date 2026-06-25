@@ -1,4 +1,4 @@
-import { FilterType, Priority } from "../types/todo";
+import type { FilterType, Priority } from "../types/todo";
 import { PRIORITY_CONFIG } from "../constants";
 
 interface SearchFilterProps {
