@@ -15,10 +15,10 @@ export function Header({
     <div className="flex items-center justify-between mb-8">
       <div>
         <h1 className="text-4xl font-black tracking-tight bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-pulse">
-          ✦ تودولیست
+          ✦ TodoList
         </h1>
         <p className="text-sm mt-1 text-gray-400 dark:text-gray-500">
-          {completedCount} از {totalCount} کار انجام شد
+          {completedCount} of {totalCount} tasks completed
         </p>
       </div>
       <button
