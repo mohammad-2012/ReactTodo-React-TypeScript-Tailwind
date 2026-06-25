@@ -7,7 +7,7 @@ import { TodoForm } from "./components/TodoForm";
 import { TodoList } from "./components/TodoList";
 import { Footer } from "./components/Footer";
 import { THEME_KEY } from "./constants";
-import { Todo } from "./types/todo";
+import type { Todo, Priority, FilterType } from "./types/todo";
 
 function generateId() {
   return Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
@@ -21,9 +21,9 @@ export default function App() {
       : window.matchMedia("(prefers-color-scheme: dark)").matches;
   });
 
-  const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
+  const [filter, setFilter] = useState<FilterType>("all");
   const [search, setSearch] = useState("");
-  const [priorityFilter, setPriorityFilter] = useState<any>("all");
+  const [priorityFilter, setPriorityFilter] = useState<Priority | "all">("all");
   const [showForm, setShowForm] = useState(false);
   const [editTodo, setEditTodo] = useState<Todo | null>(null);
 
@@ -44,7 +44,12 @@ export default function App() {
     document.documentElement.classList.toggle("dark");
   };
 
-  const handleSubmit = (data: any) => {
+  const handleSubmit = (
+    data: Omit<
+      Todo,
+      "id" | "completed" | "timerRunning" | "timerElapsed" | "createdAt"
+    >,
+  ) => {
     if (editTodo) {
       updateTodo(editTodo.id, data);
       setEditTodo(null);
