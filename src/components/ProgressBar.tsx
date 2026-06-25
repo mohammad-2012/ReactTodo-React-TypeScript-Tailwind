@@ -6,8 +6,8 @@ export function ProgressBar({ progress }: ProgressBarProps) {
   return (
     <div className="glass rounded-2xl p-4 mb-6">
       <div className="flex justify-between text-xs text-gray-400 dark:text-gray-500 mb-2">
-        <span>پیشرفت کلی</span>
-        <span className="font-bold text-indigo-400">{progress}٪</span>
+        <span>Overall Progress</span>
+        <span className="font-bold text-indigo-400">{progress}%</span>
       </div>
       <div className="h-2.5 rounded-full overflow-hidden bg-gray-200/50 dark:bg-gray-700/50">
         <div
