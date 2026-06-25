@@ -1,4 +1,4 @@
-import type { Todo, Priority } from "../types/todo";
+import type { Todo } from "../types/todo";
 import { PRIORITY_CONFIG } from "../constants";
 
 interface TodoItemProps {

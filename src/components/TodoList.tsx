@@ -1,4 +1,4 @@
-import { Todo, FilterType, Priority } from "../types/todo";
+import type { Todo, FilterType, Priority } from "../types/todo";
 import { TodoItem } from "./TodoItem";
 
 interface TodoListProps {
@@ -48,11 +48,11 @@ export function TodoList({
       >
         <div className="text-6xl mb-4 animate-bounce">🎯</div>
         <p className="text-gray-400 dark:text-gray-500 text-sm font-medium">
-          {todos.length === 0 ? "هنوز کاری اضافه نشده!" : "کاری پیدا نشد!"}
+          {todos.length === 0 ? "No tasks yet!" : "No tasks found!"}
         </p>
         {todos.length === 0 && (
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
-            روی دکمه ✦ کار جدید اضافه کن بزن!
+            Click ✦ Add New Task to get started!
           </p>
         )}
       </div>
