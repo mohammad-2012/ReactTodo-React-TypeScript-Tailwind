@@ -1,4 +1,4 @@
-# ✦ TodoList (built with React,TypeScript,Tailwind)
+# ✦ TodoList    (built with React TypeScript Tailwind)
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=for-the-badge&logo=github)](https://mohammad-2012.github.io/ReactTodo-React-TypeScript-Tailwind/)
 
